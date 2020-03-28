@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RuntimeIdentifier>linux-arm</RuntimeIdentifier>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="../../rpi-rgb-led-matrix/lib/librgbmatrix.so.1">
+      <Link>%(Filename)</Link> <!-- drop the .1 -->
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
