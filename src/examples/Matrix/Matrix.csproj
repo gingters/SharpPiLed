@@ -4,10 +4,11 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RuntimeIdentifier>linux-arm</RuntimeIdentifier>
+    <RestoreAdditionalProjectSources>../../../nugets</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SharpPiLed\SharpPiLed.csproj" />
+    <PackageReference Include="SharpPiLed" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

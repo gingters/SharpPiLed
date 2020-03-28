@@ -6,9 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="../../rpi-rgb-led-matrix/lib/librgbmatrix.so.1">
-      <Link>%(Filename)</Link> <!-- drop the .1 -->
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="../../rpi-rgb-led-matrix/lib/librgbmatrix.so" Pack="True" PackagePath="runtimes/linux-arm/native" />
   </ItemGroup>
 </Project>
