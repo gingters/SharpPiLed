@@ -41,4 +41,4 @@ if [ -d \"\$HOME/powershell\" ] ; then
 fi
 " >> .profile
 
-echo "Create a new shell, there you should be able to use dotnet and pwsh"
+echo "Create a new login shell, then you should be able to use dotnet and pwsh"
