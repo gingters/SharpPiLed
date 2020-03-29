@@ -2,7 +2,6 @@ namespace SharpPiLed.Bindings
 {
 	using System;
 	using System.IO;
-	using System.Reflection;
 	using System.Runtime.InteropServices;
 
 	internal static class RpiRgbLedMatrix
@@ -11,8 +10,14 @@ namespace SharpPiLed.Bindings
 
 		static RpiRgbLedMatrix()
 		{
-			var path = typeof(RpiRgbLedMatrix).Assembly.Location;
-			Path.
+			var path = Path.GetDirectoryName(typeof(RpiRgbLedMatrix).Assembly.Location);
+			var libraryPath = Path.Combine(path, $"{LIBRARY_NAME}.so");
+
+			// if we have a .so.1 file, then copy that to .so
+			if (File.Exists(libraryPath + ".1"))
+			{
+				File.Copy(libraryPath + ".1", libraryPath, true);
+			}
 		}
 
 		#region Bindings for Canvas
