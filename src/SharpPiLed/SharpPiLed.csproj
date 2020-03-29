@@ -21,6 +21,7 @@
   <ItemGroup>
     <None Include="../../LICENSE" Pack="true" PackagePath="" />
     <Content Include="../../rpi-rgb-led-matrix/fonts/*.bdf" PackagePath="content" />
-    <None Include="../../rpi-rgb-led-matrix/lib/librgbmatrix.so" Pack="True" PackagePath="runtimes/linux-arm/native" />
+    <None Include="../../rpi-rgb-led-matrix/lib/librgbmatrix.so.1" Pack="True" PackagePath="runtimes/linux-arm/native" />
   </ItemGroup>
+
 </Project>
