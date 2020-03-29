@@ -2,6 +2,7 @@ namespace SharpPiLed
 {
 	using System;
 	using System.IO;
+	using System.Linq;
 	using Bindings;
 
 	/// <summary>
@@ -25,10 +26,66 @@ namespace SharpPiLed
 
 			if (!File.Exists(bdfFontFile))
 			{
-				throw new ArgumentException($"The provided file '{bdfFontFile}' needs to exist.");
+				// try local folder as an alternative
+				var alternateFontPath = Path.Combine(
+					Path.GetDirectoryName(GetType().Assembly.Location),
+					Path.GetFileName(bdfFontFile)
+				);
+
+				if (!File.Exists(alternateFontPath))
+				{
+					throw new ArgumentException($"The provided file '{bdfFontFile}' needs to exist.");
+				}
+
+				bdfFontFile = alternateFontPath;
 			}
 
 			_font = RpiRgbLedMatrix.load_font(bdfFontFile);
+		}
+
+		///<summary>
+		/// This assembly contains some bdf font files as embedded resources. This method will
+		/// write the files into a specified folder, so that they can be loaded from there.
+		/// </summary>
+		/// <param name="location">A path to extract the font files into.</param>
+		public static bool ExtractFontFiles(string location)
+		{
+			if (String.IsNullOrWhiteSpace(location))
+			{
+				throw new ArgumentNullException(nameof(location));
+			}
+
+			try
+			{
+				// make sure directory is  available
+				if (!Directory.Exists(location))
+				{
+					Directory.CreateDirectory(location);
+				}
+
+				// try to extract all fonts
+				var assembly = typeof(BdfFont).Assembly;
+				foreach (var font in assembly.GetManifestResourceNames()
+					.Where(r => r.EndsWith(".bdf")))
+				{
+					var fileName = Path.Combine(location, font.Replace("SharpPiLed.fonts.", String.Empty));
+
+					if (!File.Exists(fileName))
+					{
+						using (var fileStream = File.Create(fileName))
+						using (var assemblyStream = assembly.GetManifestResourceStream(font))
+						{
+							assemblyStream.CopyTo(fileStream);
+						}
+					}
+				}
+			}
+			catch
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		internal int DrawText(IntPtr canvas, int x, int y, Color color, string text, int spacing = 0, bool vertical = false)

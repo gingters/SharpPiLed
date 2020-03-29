@@ -14,14 +14,18 @@
     </Description>
     <PackageTags>Raspberry Pi;LED;</PackageTags>
     <RepositoryUrl>https://github.com/gingters/SharpPiLed</RepositoryUrl>
+    <NoWarn>NU5125</NoWarn><!-- Next line will become deprecated, but we keep it for older nuget clients and don't warn -->
     <PackageLicenseUrl>https://github.com/gingters/SharpPiLed/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright © 2020 Sebastian Gingter</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="../../LICENSE" Pack="true" PackagePath="" />
-    <Content Include="../../rpi-rgb-led-matrix/fonts/*.bdf" PackagePath="content" />
-    <None Include="../../rpi-rgb-led-matrix/lib/librgbmatrix.so.1" Pack="True" PackagePath="runtimes/linux-arm/native" />
+    <None Include="../../rpi-rgb-led-matrix/lib/librgbmatrix.so" Pack="True" PackagePath="runtimes/linux-arm/native" />
+    <Content Include="../../rpi-rgb-led-matrix/fonts/*.bdf" PackageCopyToOutput="True" />
+    <EmbeddedResource Include="../../rpi-rgb-led-matrix/fonts/*.bdf">
+      <Link>fonts/%(Filename)%(Extension)</Link>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
