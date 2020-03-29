@@ -9,12 +9,24 @@ namespace SimpleText
 	{
 		public static int Main(string[] args)
 		{
+			if (args.Length < 1)
+			{
+				Console.WriteLine("SimpleText [font] [text]");
+				Console.WriteLine("Example: SimpleText 6x9.bdf \"Hello World!\"");
+				return -1;
+			}
+
+			var text = "Hello World!";
+			if (args.Length > 1)
+			{
+				text = args[1];
+			}
+
 			var matrix = new LedMatrix(new LedMatrixOptions(), args);
 			var canvas = matrix.CreateOffscreenCanvas();
-			canvas.DrawLine(0, 0, 16, 16, new Color(255, 0, 0));
+			var font = new BdfFont(args[0]);
 
-			var font = new BdfFont("6x13.bdf");
-			canvas.DrawText(font, 1, 20, new Color(0, 255, 0), "Thank you!");
+			canvas.DrawText(font, 1, canvas.Height - 2, new Color(0, 255, 0), text);
 
 			matrix.SwapOnVsync(canvas);
 
