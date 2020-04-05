@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using SharpPiLed;
 
-namespace SimpleText
+namespace SharpPiLed.Examples.FontExample
 {
 	public class Program
 	{

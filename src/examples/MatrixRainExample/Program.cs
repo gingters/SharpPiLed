@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using SharpPiLed;
 
-namespace Matrix
+namespace SharpPiLed.Examples.MatrixRainExample
 {
 	public class Program
 	{

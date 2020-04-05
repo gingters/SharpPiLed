@@ -1,4 +1,4 @@
-namespace Matrix
+namespace SharpPiLed.Examples.MatrixRainExample
 {
 	public class Point
 	{
