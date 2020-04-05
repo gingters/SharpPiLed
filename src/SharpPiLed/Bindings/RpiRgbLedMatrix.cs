@@ -43,6 +43,12 @@ namespace SharpPiLed.Bindings
 		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern void delete_font(IntPtr font);
 
+		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int baseline_font(IntPtr font);
+
+		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern int height_font(IntPtr font);
+
 		#endregion
 
 		#region Bindings for LedMatrix

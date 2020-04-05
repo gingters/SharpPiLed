@@ -14,6 +14,16 @@ namespace SharpPiLed
 		private IntPtr _font;
 
 		/// <summary>
+		/// Gets the height of this font in pixels.
+		/// </summary>
+		public int Height => RpiRgbLedMatrix.height_font(_font);
+
+		/// <summary>
+		/// Gets the baseline. Pixels from the topline to the baseline.
+		/// </summary>
+		public int Baseline => RpiRgbLedMatrix.baseline_font(_font);
+
+		/// <summary>
 		/// Initializes a new instance of a <see cref="BdfFont" />.
 		/// </summary>
 		/// <param name="bdfFontFile">A path to a bdf font file.</param>

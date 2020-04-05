@@ -14,11 +14,20 @@ Remarks:
 	)]
 	public class Program
 	{
-		[Required, Option(Description = "A font file to render the text in")]
-		public string Font { get; set; }
+		[Option(Description = "A font file to render the text in. Default: 6x9.bdf")]
+		public string Font { get; set; } = "6x9.bdf."
 
 		[Required, Option(Description = "The text to display")]
 		public string Text { get; set; }
+
+		[Option("-x|--x", Description = "X origin of displaying text")]
+		public int XOrigin { get; set; }
+
+		[Option("-y|--y", Description = "Y origin of displaying text")]
+		public int YOrigin { get; set; }
+
+		[Option(Description = "Spacing pixels between letters")]
+		public int Spacing { get; set; }
 
 		public static int Main(string[] args) => CommandLineApplication.Execute<Program>(args);
 
@@ -28,7 +37,7 @@ Remarks:
 			var canvas = matrix.CreateOffscreenCanvas();
 			var font = new BdfFont(Font);
 
-			canvas.DrawText(font, 1, canvas.Height - 2, new Color(0, 255, 0), Text);
+			canvas.DrawText(font, XOrigin, YOrigin + font.Baseline, new Color(0, 255, 0), Text, Spacing);
 
 			matrix.SwapOnVsync(canvas);
 
