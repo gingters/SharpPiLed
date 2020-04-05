@@ -2,6 +2,7 @@
 using System.Threading;
 using System.ComponentModel.DataAnnotations;
 using McMaster.Extensions.CommandLineUtils;
+using SharpPiLed;
 
 namespace SharpPiLed.Examples.ClockExample
 {
@@ -31,9 +32,11 @@ Remarks:
 		[Option("-fmt|--format", Description = "The date time format string. Default: hh:mm:ss")]
 		public string Format { get; set; }= "hh:mm:ss";
 
-		public Color BackgroundColor = new Color(0, 0, 0);
-		public Color Color = new Color(255, 255, 0);
-		public Color OutlineColor = new Color(0, 0, 0);
+		[Option("-c|--color", "Color for the font. Default: 255,255,0", CommandOptionType.SingleValue)]
+		public Color Color { get; set; } = new Color(255, 255, 0);
+
+		[Option("-bc|--background-color", "Color for the background. Default: 0,0,0", CommandOptionType.SingleValue)]
+		public Color BackgroundColor { get; set; } = new Color(0, 0, 0);
 
 		public static int Main(string[] args) => CommandLineApplication.Execute<Program>(args);
 
@@ -48,7 +51,6 @@ Remarks:
 			if (Brightness == 100
 				&& FullSaturation(Color)
 				&& FullSaturation(BackgroundColor)
-				&& FullSaturation(OutlineColor)
 				)
 			{
 				options.PwmBits = 1;
