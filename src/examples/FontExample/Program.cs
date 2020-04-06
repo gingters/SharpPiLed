@@ -15,15 +15,15 @@ Remarks:
 	public class Program
 	{
 		[Option(Description = "A font file to render the text in. Default: 6x9.bdf")]
-		public string Font { get; set; } = "6x9.bdf."
+		public string Font { get; set; } = "6x9.bdf.";
 
-		[Required, Option(Description = "The text to display")]
-		public string Text { get; set; }
+		[Option(Description = "The text to display")]
+		public string Text { get; set; } = "Hello World!";
 
-		[Option("-x|--x", Description = "X origin of displaying text")]
+		[Option(Description = "X origin of displaying text")]
 		public int XOrigin { get; set; }
 
-		[Option("-y|--y", Description = "Y origin of displaying text")]
+		[Option(Description = "Y origin of displaying text")]
 		public int YOrigin { get; set; }
 
 		[Option(Description = "Spacing pixels between letters")]

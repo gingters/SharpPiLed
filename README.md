@@ -25,6 +25,9 @@ canvas.DrawLine(1, 1, 16, 16, new Color(255, 0,0));
 // figure that out ;) But its required for the panel to show sth.
 matrix.SwapOnVsync(canvas);
 ```
+## Examples
+
+See the [Examples](./src/examples/README.md) documentation.
 
 ### Configuration
 
@@ -64,6 +67,7 @@ The `rpi-rgb-led-matrix` library needs to initialize some low-level hardware tha
 
 Further information can be found in the [original docs](https://github.com/hzeller/rpi-rgb-led-matrix/#running-as-root).
 
+See also the [Examples](./src/examples/README.md) documentation.
 
 ## Building this library and examples
 
