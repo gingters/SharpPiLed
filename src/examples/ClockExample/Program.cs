@@ -14,6 +14,9 @@ Remarks:
 	)]
 	public class Program
 	{
+		private bool _useOutline = false;
+		private Color _outlineColor = new Color(0, 0, 0);
+
 		[Option(Description = "A font file to render the clock in. Default: 9x13.bdf")]
 		public string Font { get; set; } = "8x13.bdf";
 
@@ -38,6 +41,19 @@ Remarks:
 		[Option("-bc|--background-color", "Color for the background. Default: 0,0,0", CommandOptionType.SingleValue)]
 		public Color BackgroundColor { get; set; } = new Color(0, 0, 0);
 
+		[Option("-oc|--outline-color", "Color for the outline font. Default: 0,0,0", CommandOptionType.SingleValue)]
+		public Color OutlineColor {
+			get
+			{
+				return _outlineColor;
+			}
+			set
+			{
+				_outlineColor = value;
+				_useOutline = true;
+			}
+		}
+
 		public static int Main(string[] args) => CommandLineApplication.Execute<Program>(args);
 
 		private int OnExecute()
@@ -60,12 +76,18 @@ Remarks:
 
 			var canvas = matrix.CreateOffscreenCanvas();
 			var font = new BdfFont(Font);
+			var outlineFont = (BdfFont) ((_useOutline) ? font.CreateOutlineFont() : null);
 
 			while (!Console.KeyAvailable)
 			{
 				var text = DateTime.UtcNow.ToString(Format);
 
 				canvas.Fill(BackgroundColor);
+
+				if (_useOutline)
+				{
+					canvas.DrawText(outlineFont, XOrigin - 1, YOrigin + font.Baseline, OutlineColor, text, Spacing - 2);
+				}
 				canvas.DrawText(font, XOrigin, YOrigin + font.Baseline, Color, text, Spacing);
 
 				matrix.SwapOnVsync(canvas);

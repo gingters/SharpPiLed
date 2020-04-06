@@ -11,6 +11,7 @@ namespace SharpPiLed
 	/// </summary>
 	public class BdfFont : IDisposable
 	{
+		// A pointer to the native font instance.
 		private IntPtr _font;
 
 		/// <summary>
@@ -22,6 +23,15 @@ namespace SharpPiLed
 		/// Gets the baseline. Pixels from the topline to the baseline.
 		/// </summary>
 		public int Baseline => RpiRgbLedMatrix.baseline_font(_font);
+
+		/// <summary>
+		/// Initializes a new instance of a <see cref="BdfFont" />.
+		/// </summary>
+		/// <param name="fontPointer">A pointer to a native font instance.</param>
+		private BdfFont(IntPtr fontPointer)
+		{
+			_font = fontPointer;
+		}
 
 		/// <summary>
 		/// Initializes a new instance of a <see cref="BdfFont" />.
@@ -51,6 +61,15 @@ namespace SharpPiLed
 			}
 
 			_font = RpiRgbLedMatrix.load_font(bdfFontFile);
+		}
+
+		///<summary>
+		/// Creates an outline font based on the current font instance.
+		/// </summary>
+		public BdfFont CreateOutlineFont()
+		{
+			var outlineFont = RpiRgbLedMatrix.create_outline_font(_font);
+			return new BdfFont(outlineFont);
 		}
 
 		///<summary>

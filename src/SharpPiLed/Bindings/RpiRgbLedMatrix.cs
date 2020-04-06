@@ -41,13 +41,16 @@ namespace SharpPiLed.Bindings
 		public static extern int vertical_draw_text(IntPtr canvas, IntPtr font, int x, int y, byte r, byte g, byte b, string utf8_text, int kerning_offset);
 
 		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-		public static extern void delete_font(IntPtr font);
-
-		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int baseline_font(IntPtr font);
 
 		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
 		public static extern int height_font(IntPtr font);
+
+		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern IntPtr create_outline_font(IntPtr font);
+
+		[DllImport(LIBRARY_NAME, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+		public static extern void delete_font(IntPtr font);
 
 		#endregion
 
