@@ -1,8 +1,9 @@
-name: C/C++ CI
+name: Build
 
 on:
   push:
     branches: [ master ]
+
   pull_request:
     branches: [ master ]
 
@@ -41,3 +42,9 @@ jobs:
 
       - name: Build SharpPiLed
         run: dotnet pack ./src/SharpPiLed -c Release -o ./nugets
+
+      - name: Gather Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Package
+          path: ./nugets/*.nupkg
