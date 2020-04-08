@@ -1,0 +1,41 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout submodule
+        uses: textbook/git-checkout-submodule-action@master
+
+      - name: Install Cross-compiling toolchain
+        run: sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi binutils-arm-linux-gnueabi
+
+      - name: Install .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.201' # SDK Version to use.
+
+      - name: Build rpi-rgb-led-matrix
+        env:
+          AR: arm-linux-gnueabihf-ar
+          CC: arm-linux-gnueabihf-gcc
+          CXX: arm-linux-gnueabihf-g++
+          LINK: arm-linux-gnueabihf-g++
+        run: make --directory ./rpi-rgb-led-matrix
+
+      - name: Prepare library for bundling
+        run: ln -s ./rpi-rgb-led-matrix/lib/librgbmatrix.so.1 ./rpi-rgb-led-matrix/lib/librgbmatrix.so
+
+      - name: Build SharpPiLed
+        run: dotnet pack ./src/SharpPiLed -c Release -o ./nugets
