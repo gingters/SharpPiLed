@@ -19,7 +19,7 @@ jobs:
         uses: textbook/git-checkout-submodule-action@master
 
       - name: Install Cross-compiling toolchain
-        run: sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi
+        run: sudo apt-get update && sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi binutils-arm-linux-gnueabi
 
       - name: Install .NET Core SDK
         uses: actions/setup-dotnet@v1
