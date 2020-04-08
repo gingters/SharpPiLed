@@ -32,7 +32,7 @@ jobs:
           CC: arm-linux-gnueabihf-gcc
           CXX: arm-linux-gnueabihf-g++
           LINK: arm-linux-gnueabihf-g++
-        run: make --directory ./rpi-rgb-led-matrix
+        run: sudo chmod 777 -R ./rpi-rgb-led-matrix/ && make --directory ./rpi-rgb-led-matrix
 
       - name: Prepare library for bundling
         run: ln -s ./rpi-rgb-led-matrix/lib/librgbmatrix.so.1 ./rpi-rgb-led-matrix/lib/librgbmatrix.so
