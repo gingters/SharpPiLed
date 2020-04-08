@@ -8,9 +8,14 @@ We use (a fork of) his library as a submodule, but add our own interpretation of
 
 This project is simply a (slightly opinionated) .NET Core wrapper around that library, so I strongly suggest to get the native examples running first to make sure your LED panel works as expected and you figured out your `led-row-addr-type` and `led-multiplexing` settings as well as potentially required muxer settings for your panel type **before** attempting to control your panel from .NET with this wrapper.
 
+**Be aware** that this is for .NET Core, and .NET Core currently only supports ARMv7 CPU's, so this will _not_ work on a Raspberry Pi Zero or Zero W.
+
 ## Using SharpPiLed
 
-Adding **SharpPiLed** is as easy as `dotnet add package SharpPiLed` to your .NET Core project.
+Adding **SharpPiLed** will be as easy as `dotnet add package SharpPiLed` to your .NET Core project.
+
+**Note:** This package is *not* published yet and is still work in progress. For the time being please compile it on your Pi.
+
 
 Then you create a `LedMatrix` instance, configured with your `LedMatrixOptions`, get hold of your `Canvas` and draw onto it:
 
