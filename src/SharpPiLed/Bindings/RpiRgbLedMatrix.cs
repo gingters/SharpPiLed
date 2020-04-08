@@ -5,7 +5,7 @@ namespace SharpPiLed.Bindings
 
 	internal static class RpiRgbLedMatrix
 	{
-		private const string LIBRARY_NAME = "librgbmatrix.so";
+		private const string LIBRARY_NAME = "librgbmatrix";
 
 		#region Bindings for Canvas
 
