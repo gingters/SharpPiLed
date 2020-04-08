@@ -46,5 +46,5 @@ jobs:
       - name: Gather Artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: Package
-          path: ./nugets/*
+          name: SharpPiLed Package
+          path: ./nugets/SharpPiLed.1.0.0.nupkg
